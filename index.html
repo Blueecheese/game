@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PulsePlay SA - Ultimate Gaming Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', Arial, sans-serif;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: #1f1f1f;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.5);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        nav h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #00ffcc;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 2.5rem;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #00ffcc;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1f1f1f, #0a0a0a), url('https://source.unsplash.com/random/1600x900?gaming') no-repeat center;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            color: #00ffcc;
+            text-shadow: 0 0 20px rgba(0,255,204,0.8);
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.6rem;
+            margin-bottom: 2rem;
+            color: #ddd;
+        }
+
+        .cta-button {
+            background: #ff007a;
+            color: #fff;
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255,0,122,0.5);
+        }
+
+        .cta-button:hover {
+            background: #cc0061;
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(255,0,122,0.8);
+        }
+
+        .products {
+            max-width: 1400px;
+            margin: 6rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .product-card {
+            background: #1f1f1f;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.4s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5), 0 0 20px rgba(0,255,204,0.2);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .product-info h3 {
+            font-size: 1.7rem;
+            color: #00ffcc;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-info p {
+            color: #aaa;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ff007a;
+        }
+
+        .filter-bar {
+            max-width: 1400px;
+            margin: 3rem auto 2rem;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .filter-bar button {
+            background: #333;
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            margin: 0 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-bar button:hover {
+            background: #00ffcc;
+            color: #1f1f1f;
+        }
+
+        footer {
+            background: #1f1f1f;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid #333;
+        }
+
+        footer p {
+            color: #aaa;
+            margin: 0.5rem 0;
+        }
+
+        footer a {
+            color: #00ffcc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #ff007a;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>PulsePlay SA</h1>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#shop">Shop</a></li>
+                <li><a href="#custom">Custom Builds</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Unleash Your Gaming Pulse</h1>
+            <p>"Next-Gen Consoles, PCs & More - SA’s Ultimate Gaming Hub"</p>
+            <button class="cta-button">Level Up Now</button>
+        </div>
+    </section>
+
+    <div class="filter-bar">
+        <button>All</button>
+        <button>Consoles</button>
+        <button>PCs</button>
+        <button>Controllers</button>
+        <button>Games</button>
+        <button>Subscriptions</button>
+    </div>
+
+    <section class="products" id="shop">
+        <!-- Consoles -->
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?ps5" alt="PS5">
+            <div class="product-info">
+                <h3>PlayStation 5</h3>
+                <p>"Next-Gen Gaming, SA Ready"</p>
+                <div class="price">R11,999</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?xbox series x" alt="Xbox Series X">
+            <div class="product-info">
+                <h3>Xbox Series X</h3>
+                <p>"Power Up Your Playtime"</p>
+                <div class="price">R12,499</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?nintendo switch" alt="Nintendo Switch">
+            <div class="product-info">
+                <h3>Nintendo Switch OLED</h3>
+                <p>"Portable Fun, Vibrant Display"</p>
+                <div class="price">R7,999</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?ps5 slim" alt="PS5 Slim">
+            <div class="product-info">
+                <h3>PlayStation 5 Slim</h3>
+                <p>"Sleek Design, Same Power"</p>
+                <div class="price">R10,499</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Gaming PCs -->
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?gaming pc" alt="Gaming PC">
+            <div class="product-info">
+                <h3>PulsePlay RTX 4080 PC</h3>
+                <p>"Custom-Built for SA Gamers"</p>
+                <div class="price">R34,999</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?gaming pc rgb" alt="RGB Gaming PC">
+            <div class="product-info">
+                <h3>PulsePlay RGB Beast PC</h3>
+                <p>"Max Frames, Max Style"</p>
+                <div class="price">R29,999</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?mini pc" alt="Mini Gaming PC">
+            <div class="product-info">
+                <h3>PulsePlay Mini RTX 3060</h3>
+                <p>"Compact Powerhouse"</p>
+                <div class="price">R19,999</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?high end pc" alt="High-End PC">
+            <div class="product-info">
+                <h3>PulsePlay Titan RTX 4090</h3>
+                <p>"Ultimate Performance"</p>
+                <div class="price">R49,999</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Controllers -->
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?controller" alt="Controller">
+            <div class="product-info">
+                <h3>Elite Pulse Controller</h3>
+                <p>"Precision in Every Move"</p>
+                <div class="price">R1,999</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?dualsense" alt="DualSense">
+            <div class="product-info">
+                <h3>PS5 DualSense Edge</h3>
+                <p>"Next-Level Control"</p>
+                <div class="price">R4,499</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?xbox controller" alt="Xbox Controller">
+            <div class="product-info">
+                <h3>Xbox Elite Series 2</h3>
+                <p>"Pro Gaming Precision"</p>
+                <div class="price">R3,799</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?custom controller" alt="Custom Controller">
+            <div class="product-info">
+                <h3>PulsePlay Neon Controller</h3>
+                <p>"Customized for You"</p>
+                <div class="price">R2,499</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Custom Consoles -->
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?custom ps5" alt="Custom PS5">
+            <div class="product-info">
+                <h3>Custom PS5 Neon Edition</h3>
+                <p>"Stand Out in Style"</p>
+                <div class="price">R14,999</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?custom xbox" alt="Custom Xbox">
+            <div class="product-info">
+                <h3>Custom Xbox Cyber Edition</h3>
+                <p>"Futuristic Gaming Vibes"</p>
+                <div class="price">R15,499</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?custom switch" alt="Custom Switch">
+            <div class="product-info">
+                <h3>Custom Switch Galaxy</h3>
+                <p>"Portable Cosmic Design"</p>
+                <div class="price">R9,999</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?custom console" alt="Custom Console">
+            <div class="product-info">
+                <h3>PulsePlay Retro Custom PS5</h3>
+                <p>"Nostalgia Meets Modern"</p>
+                <div class="price">R14,499</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Latest Games (Disc) -->
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?gta" alt="GTA V">
+            <div class="product-info">
+                <h3>Grand Theft Auto V (Disc)</h3>
+                <p>"Los Santos Awaits"</p>
+                <div class="price">R699</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?fc25" alt="FC25">
+            <div class="product-info">
+                <h3>EA Sports FC 25 (Disc)</h3>
+                <p>"Ultimate Football Glory"</p>
+                <div class="price">R1,399</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?cod" alt="COD">
+            <div class="product-info">
+                <h3>Call of Duty: Black Ops 6 (Disc)</h3>
+                <p>"Latest Blockbuster Action"</p>
+                <div class="price">R1,299</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?cyberpunk" alt="Cyberpunk">
+            <div class="product-info">
+                <h3>Cyberpunk 2077 (Disc)</h3>
+                <p>"Neon-Charged Adventure"</p>
+                <div class="price">R999</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?god of war" alt="God of War">
+            <div class="product-info">
+                <h3>God of War Ragnarok (Disc)</h3>
+                <p>"Epic Norse Saga"</p>
+                <div class="price">R1,199</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?spiderman" alt="Spider-Man">
+            <div class="product-info">
+                <h3>Spider-Man 2 (Disc)</h3>
+                <p>"Swing into Action"</p>
+                <div class="price">R1,299</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?nba" alt="NBA">
+            <div class="product-info">
+                <h3>NBA 2K25 (Disc)</h3>
+                <p>"Court King Returns"</p>
+                <div class="price">R1,399</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?fifa" alt="FIFA">
+            <div class="product-info">
+                <h3>FIFA Legacy Edition (Disc)</h3>
+                <p>"Classic Football Fun"</p>
+                <div class="price">R799</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Latest Games (Online) -->
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?gta online" alt="GTA Online">
+            <div class="product-info">
+                <h3>GTA Online (Digital)</h3>
+                <p>"Endless Crime Adventures"</p>
+                <div class="price">R499</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?fc25 online" alt="FC25 Online">
+            <div class="product-info">
+                <h3>EA Sports FC 25 (Digital)</h3>
+                <p>"Online Football Mastery"</p>
+                <div class="price">R1,399</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?cod online" alt="COD Online">
+            <div class="product-info">
+                <h3>COD: Black Ops 6 (Digital)</h3>
+                <p>"Multiplayer Mayhem"</p>
+                <div class="price">R1,299</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?fortnite" alt="Fortnite">
+            <div class="product-info">
+                <h3>Fortnite (Digital)</h3>
+                <p>"Battle Royale Free-to-Play"</p>
+                <div class="price">R0</div>
+                <button class="cta-button">Download Now</button>
+            </div>
+        </div>
+
+        <!-- Accessories -->
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?headset" alt="Headset">
+            <div class="product-info">
+                <h3>PulsePlay Gaming Headset</h3>
+                <p>"Immersive Audio Experience"</p>
+                <div class="price">R2,999</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?vr" alt="PSVR2">
+            <div class="product-info">
+                <h3>PlayStation VR2</h3>
+                <p>"Step Into Virtual Worlds"</p>
+                <div class="price">R12,999</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?charging dock" alt="Charging Dock">
+            <div class="product-info">
+                <h3>Dual Controller Charger</h3>
+                <p>"Keep Your Gear Ready"</p>
+                <div class="price">R799</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?cooling stand" alt="Cooling Stand">
+            <div class="product-info">
+                <h3>Console Cooling Stand</h3>
+                <p>"Optimize Performance"</p>
+                <div class="price">R999</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Subscriptions -->
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?playstation plus" alt="PS Plus">
+            <div class="product-info">
+                <h3>PlayStation Plus (1 Year)</h3>
+                <p>"Online Play & Free Games"</p>
+                <div class="price">R1,599</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?xbox live" alt="Xbox Live">
+            <div class="product-info">
+                <h3>Xbox Live Gold (1 Year)</h3>
+                <p>"Multiplayer & Deals"</p>
+                <div class="price">R1,499</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?game pass" alt="Game Pass">
+            <div class="product-info">
+                <h3>Xbox Game Pass Ultimate (1 Year)</h3>
+                <p>"Hundreds of Games"</p>
+                <div class="price">R2,399</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?ps plus premium" alt="PS Plus Premium">
+            <div class="product-info">
+                <h3>PS Plus Premium (1 Year)</h3>
+                <p>"All Access Gaming"</p>
+                <div class="price">R2,799</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Bonus Items -->
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?gaming chair" alt="Gaming Chair">
+            <div class="product-info">
+                <h3>PulsePlay Gaming Chair</h3>
+                <p>"Comfort for Long Sessions"</p>
+                <div class="price">R5,999</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="product-card fade-in">
+            <img src="https://source.unsplash.com/random/400x400?monitor" alt="Monitor">
+            <div class="product-info">
+                <h3>4K Gaming Monitor 32"</h3>
+                <p>"Crystal Clear Visuals"</p>
+                <div class="price">R8,999</div>
+                <button class="cta-button">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 PulsePlay SA - "Where SA Gamers Thrive"</p>
+        <p>Contact: <a href="mailto:support@pulseplay.co.za">support@pulseplay.co.za</a> | 0800-PULSE-SA</p>
+    </footer>
+
+    <script>
+        // Fade-in animation on scroll
+        const elements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        elements.forEach(element => observer.observe(element));
+    </script>
+</body>
+</html>
